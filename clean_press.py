@@ -83,11 +83,9 @@ df['percent'] = df['percent'].fillna("")
 column_config={
         "percent": st.column_config.NumberColumn(format="%.2f")
         , "actual": st.column_config.NumberColumn(format="%.2f")
-        , "composition": st.column_config.ListColumn()
-#        , "composition2": st.column_config.ImageColumn()
+        , "composition": st.column_config.ListColumn(width="large")
     }
 
-#st.table(df)
 st.dataframe(df
               , hide_index=True
               , column_config=column_config
