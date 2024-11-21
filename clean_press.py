@@ -63,12 +63,18 @@ def make_weight_list(my_plates):
     return [p['weight'] for p in my_plates]
 
 
+st.set_page_config(
+    page_title="WOD with william",
+    page_icon=":weight_lifter:"
+)
+
 options = [plate['weight'] for plate in reversed(sorted_plates)]
 plates_selection = st.pills("Choose your plates"
                            , options
                            , default = [w for w in options if w <=10]
                            , selection_mode="multi")
 
+st.divider()
 
 weight_one_rep = st.number_input("Enter your 1 REP weight (in Kg)"
                                  , value=60.0
