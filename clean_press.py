@@ -74,11 +74,11 @@ plates_selection = st.pills("Choose your plates"
                            , default = [w for w in options if w <=10]
                            , selection_mode="multi")
 
-st.divider()
 
 weight_one_rep = st.number_input("Enter your 1 REP weight (in Kg)"
                                  , value=60.0
                                  ,step=2.5)
+st.divider()
 
 df = make_table(weight_one_rep, plates_selection)
 
