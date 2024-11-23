@@ -17,7 +17,9 @@ plates = [
     {"weight": 10, "color" : 'black'},
     {"weight": 5, "color": 'black'},
     {"weight": 2.5, "color": 'red'},
-    {"weight": 1.25, "color": 'black'}
+    {"weight": 1.25, "color": 'black'},
+    {"weight": 1, "color": 'black'},
+    {"weight": 0.5, "color": 'black'}
 ]
 sorted_plates = sorted(plates, key=lambda x: x['weight'], reverse=True)
 
@@ -33,18 +35,18 @@ def decompose_weight(weight, weights_selection):
             composition.append(plate)
             current_weight = current_weight + plate["weight"]
 
-    # remaining_weight = semi_weight
-    # for plate, next_plate in reversed(plates):
-    #     nb_plates = remaining_weight // plate[weight]
-    #     nb_to_next_plate = next_plate['weight'] /  = 
     return composition
 
 
 def make_table(weight, plates_selection):
+    if weight <= 35:
+        rounding_value = 1
+    else:
+        rounding_value = 2.5
     percents = [i for i in np.arange(0.8, 1.01, 0.02)]
     perfect_weights = [round(weight * p, 2) for p in percents]
-    min_weights = [math.floor(w / 2.5) * 2.5 for w in perfect_weights]
-    max_weights = [math.ceil(w / 2.5) * 2.5 for w in perfect_weights]
+    min_weights = [math.floor(w / rounding_value) * rounding_value for w in perfect_weights]
+    max_weights = [math.ceil(w / rounding_value) * rounding_value for w in perfect_weights]
     actual_weights = list(set(min_weights + max_weights))
     compositions = [decompose_weight(w, plates_selection) for w in actual_weights]
 
@@ -71,7 +73,7 @@ st.set_page_config(
 options = [plate['weight'] for plate in reversed(sorted_plates)]
 plates_selection = st.pills("Choose your plates"
                            , options
-                           , default = [w for w in options if w <=10]
+                           , default = [w for w in options if w <=10 and w>=1.25]
                            , selection_mode="multi")
 
 
