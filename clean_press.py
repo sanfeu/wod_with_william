@@ -39,10 +39,7 @@ def decompose_weight(weight, weights_selection):
 
 
 def make_table(weight, plates_selection):
-    if weight <= 35:
-        rounding_value = 1
-    else:
-        rounding_value = 2.5
+    rounding_value = min(plates_selection)
     percents = [i for i in np.arange(0.8, 1.01, 0.02)]
     perfect_weights = [round(weight * p, 2) for p in percents]
     min_weights = [math.floor(w / rounding_value) * rounding_value for w in perfect_weights]
